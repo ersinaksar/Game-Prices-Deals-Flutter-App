@@ -31,7 +31,6 @@ class _GameMasterAppState extends State<GameMasterApp> {
                     MaterialPageRoute(
                         builder: (context) => SelectGameWidget()));
 
-                debugPrint("selectedGame " + selectedGame!);
                 if (selectedGame != null) {
                   _gameBloc.add(FetchGameEvent(game_name: selectedGame!));
                 }
@@ -55,6 +54,7 @@ class _GameMasterAppState extends State<GameMasterApp> {
             }
             if (state is GameLoadedState) {
               final incomingGame = state.gameModel;
+              selectedGame = incomingGame.info!.title;
               _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return RefreshIndicator(
