@@ -9,7 +9,7 @@ class HeaderTextWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Text(
-          "Game Name",
+          header!,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 30,

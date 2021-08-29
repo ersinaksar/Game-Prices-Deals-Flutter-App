@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class UpdateTextWidget extends StatelessWidget {
-  const UpdateTextWidget({Key? key}) : super(key: key);
-
+  //const UpdateTextWidget({Key? key}) : super(key: key);
+  var date;
+  UpdateTextWidget({required this.date});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,3 +20,4 @@ class UpdateTextWidget extends StatelessWidget {
     );
   }
 }
+//TimeOfDay.fromDateTime(date).format(context)

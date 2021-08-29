@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AdditionalDataWidget extends StatelessWidget {
-  const AdditionalDataWidget({Key? key}) : super(key: key);
-
+  late String additionalDataName;
+  late String additionalData;
+  AdditionalDataWidget(
+      {required this.additionalDataName, required this.additionalData});
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Additional Data " + 24.toString() + " Data",
+      additionalDataName + additionalData,
       style: TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 20,
