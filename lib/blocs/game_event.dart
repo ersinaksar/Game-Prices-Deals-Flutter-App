@@ -11,3 +11,11 @@ class FetchGameEvent extends GameEvent {
   // TODO: implement props
   List<Object?> get props => [game_name];
 }
+
+class RefreshGameEvent extends GameEvent {
+  late final String game_name;
+  RefreshGameEvent({required this.game_name});
+  @override
+  // TODO: implement props
+  List<Object?> get props => [game_name];
+}

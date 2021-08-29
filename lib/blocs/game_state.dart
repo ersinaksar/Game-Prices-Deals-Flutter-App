@@ -28,3 +28,9 @@ class GameErrorState extends GameState {
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
 }
+
+class GameInternetErrorState extends GameState {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}

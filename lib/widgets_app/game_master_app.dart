@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_prices_deals_flutter_app/action_widgets_app/select_game_widget.dart';
@@ -14,7 +16,7 @@ class GameMasterApp extends StatefulWidget {
 
 class _GameMasterAppState extends State<GameMasterApp> {
   String? selectedGame = "StarCraft2";
-
+  Completer<void> _refreshCompleter = Completer<void>();
   @override
   Widget build(BuildContext context) {
     final _gameBloc = BlocProvider.of<GameBloc>(context);
@@ -53,20 +55,33 @@ class _GameMasterAppState extends State<GameMasterApp> {
             }
             if (state is GameLoadedState) {
               final incomingGame = state.gameModel;
-              return ListView(
-                children: [
-                  NameWidget(
-                    name: incomingGame.info!.title,
-                  ),
-                  //LastUpdateWidget(),
-                  GameImageWidget(),
-                  GameAdditionalData(),
-                ],
+              _refreshCompleter.complete();
+              _refreshCompleter = Completer();
+              return RefreshIndicator(
+                onRefresh: () async {
+                  _gameBloc.add(RefreshGameEvent(game_name: selectedGame!));
+                  return _refreshCompleter.future;
+                },
+                child: ListView(
+                  children: [
+                    NameWidget(
+                      name: incomingGame.info!.title,
+                    ),
+                    //LastUpdateWidget(),
+                    GameImageWidget(),
+                    GameAdditionalData(),
+                  ],
+                ),
               );
             }
             if (state is GameErrorState) {
               return Center(
                 child: Text("Error"),
+              );
+            }
+            if (state is GameInternetErrorState) {
+              return Center(
+                child: Text("Check your connection"),
               );
             }
 
